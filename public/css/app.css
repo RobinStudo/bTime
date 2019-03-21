@@ -32,3 +32,36 @@ html, body{
 .landing a.btn{
     font-size: 2rem;
 }
+
+.events{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.events .event{
+    width: calc( 33% - 40px );
+    margin: 20px;
+}
+
+.events .event-picture{
+    height: 200px;
+    background-size: cover;
+    background-position: right;
+    position: relative;
+}
+
+.events .event-info{
+    margin: 5px;
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.3rem;
+}
+
+.events .badge-pill{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 0.9rem;
+}
