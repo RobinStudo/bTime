@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ event.name }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="event">
+    <div class="event-landing" style="background-image: url('{{ event.picture }}');">
+        <div class="event-landing__container">
+            {{ event.name }}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-lg-8 p-4">
+                <h2>Description</h2>
+                {{ event.description }}
+
+                <div class="my-4">
+                    <a href="{{ path( 'event_join', { id: event.id } ) }}" class="btn btn-primary btn-lg font-weight-bold">Rejoindre l'événement</a>
+                </div>
+            </div>
+            <div class="col-sm-12 col-lg-4 bg-dark text-light py-4 event-info">
+                <div class="">
+                    <i class="fas fa-calendar-alt"></i>
+                    {{ event.startAt|date('d/m/Y H:i') }}
+                </div>
+
+                <div class="">
+                    <i class="fas fa-calendar-times"></i>
+                    {{ event.endAt|date('d/m/Y H:i') }}
+                </div>
+
+                <div class="">
+                    <i class="fas fa-map-marker-alt"></i>
+                    {{ event.place }}
+                </div>
+
+                <div class="">
+                    <i class="fas fa-euro-sign"></i>
+                    {{ ( event.price ) ? event.price : 'Gratuit' }}
+                </div>
+
+                <div class="">
+                    <i class="fas fa-users"></i>
+                    {{ event.capacity }}
+                </div>
+
+                <div class="">
+                    <i class="fas fa-user"></i>
+                    {{ event.owner }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
