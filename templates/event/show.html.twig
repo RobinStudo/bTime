@@ -31,9 +31,13 @@
                     {{ event.endAt|date('d/m/Y H:i') }}
                 </div>
 
-                <div class="">
+                <div class="event-place">
                     <i class="fas fa-map-marker-alt"></i>
-                    {{ event.place }}
+                    <div class="event-place__info">
+                        {{ event.place.name }}<br>
+                        {{ event.place.address }}<br>
+                        {{ event.place.city }}
+                    </div>
                 </div>
 
                 <div class="">
@@ -43,12 +47,12 @@
 
                 <div class="">
                     <i class="fas fa-users"></i>
-                    {{ event.capacity }}
+                    {{ event.capacity ?? 'Illimité' }}
                 </div>
 
                 <div class="">
                     <i class="fas fa-user"></i>
-                    {{ event.owner }}
+                    {{ event.owner.username }} ({{ event.owner.email }})
                 </div>
             </div>
         </div>

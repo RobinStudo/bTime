@@ -5,6 +5,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Service\EventService;
+use App\Entity\Event;
 
 class EventController extends AbstractController
 {
