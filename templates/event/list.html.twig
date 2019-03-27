@@ -4,6 +4,10 @@
 
 {% block body %}
 
+<div class="text-center counter">
+    Il y a {{ incomingCounter }} événements à venir
+</div>
+
 <div class="events">
 
     {% for event in events %}

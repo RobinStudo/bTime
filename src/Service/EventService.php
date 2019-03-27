@@ -20,4 +20,8 @@ class EventService{
     public function get( $id ){
         return $this->repository->find( $id );
     }
+
+    public function countIncoming(){
+        return $this->repository->countIncoming();
+    }
 }

@@ -14,8 +14,16 @@ class EventController extends AbstractController
      * @Route("/events", name="event_list")
      */
     public function list( EventService $eventService ){
+
+        // if( !empty(  ) ){
+            // $events = $eventService->search(  );
+        // }else{
+            $events = $eventService->getAll();
+        // }
+
         return $this->render( 'event/list.html.twig', array(
-            'events' => $eventService->getAll(),
+            'events' => $events,
+            'incomingCounter' => $eventService->countIncoming(),
         ));
     }
 
