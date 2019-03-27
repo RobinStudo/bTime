@@ -4,8 +4,16 @@
 
 {% block body %}
 
-<div class="text-center counter">
+<div class="text-center counter my-2">
     Il y a {{ incomingCounter }} événements à venir
+</div>
+
+<div class="sorting my-2 text-center">
+    Trier par :
+    {% set query = app.request.query.get('query') %}
+    <a href="?sort=price{{ ( query is not empty ) ? '&query=' ~ query : '' }}">Prix</a> |
+    <a href="?sort=createdAt{{ ( query is not empty ) ? '&query=' ~ query : '' }}">Nouveauté</a> |
+    <a href="?sort=capacity{{ ( query is not empty ) ? '&query=' ~ query : '' }}">Capacité</a>
 </div>
 
 <div class="events">

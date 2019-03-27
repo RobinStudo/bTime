@@ -16,11 +16,12 @@ class EventController extends AbstractController
      */
     public function list( Request $request, EventService $eventService ){
         $query = $request->query->get( 'query' );
+        $sort = $request->query->get( 'sort', 'id' );
 
         if( !empty( $query ) ){
-            $events = $eventService->search( $query );
+            $events = $eventService->search( $query, $sort );
         }else{
-            $events = $eventService->getAll();
+            $events = $eventService->getAll( $sort );
         }
 
         return $this->render( 'event/list.html.twig', array(

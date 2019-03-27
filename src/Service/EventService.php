@@ -13,8 +13,10 @@ class EventService{
         $this->repository = $om->getRepository( Event::class );
     }
 
-    public function getAll(){
-        return $this->repository->findAll();
+    public function getAll( $sort ){
+        return $this->repository->findBy( array(), array(
+            $sort => 'DESC'
+        ));
     }
 
     public function get( $id ){
@@ -25,7 +27,7 @@ class EventService{
         return $this->repository->countIncoming();
     }
 
-    public function search( $term ){
-        return $this->repository->search( $term );
+    public function search( $term, $sort ){
+        return $this->repository->search( $term, $sort );
     }
 }
