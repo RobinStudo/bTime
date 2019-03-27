@@ -24,4 +24,8 @@ class EventService{
     public function countIncoming(){
         return $this->repository->countIncoming();
     }
+
+    public function search( $term ){
+        return $this->repository->search( $term );
+    }
 }

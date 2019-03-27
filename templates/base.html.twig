@@ -25,6 +25,11 @@
                     <a class="nav-item nav-link" href="{{ path('event_list') }}">Nos événements</a>
                     <a class="nav-item nav-link" href="{{ path('event_add') }}">Ajouter un événement</a>
                 </div>
+
+                <form action="{{ path('event_list') }}" method="get" class="form-inline">
+                    <input class="form-control mx-2 ml-sm-0" type="search" name="query" placeholder="Recherche..." aria-label="Recherche">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+                </form>
             </div>
         </nav>
 

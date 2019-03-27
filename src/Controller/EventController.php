@@ -4,6 +4,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use App\Service\EventService;
 use App\Entity\Event;
 
@@ -13,13 +14,14 @@ class EventController extends AbstractController
     /**
      * @Route("/events", name="event_list")
      */
-    public function list( EventService $eventService ){
+    public function list( Request $request, EventService $eventService ){
+        $query = $request->query->get( 'query' );
 
-        // if( !empty(  ) ){
-            // $events = $eventService->search(  );
-        // }else{
+        if( !empty( $query ) ){
+            $events = $eventService->search( $query );
+        }else{
             $events = $eventService->getAll();
-        // }
+        }
 
         return $this->render( 'event/list.html.twig', array(
             'events' => $events,
