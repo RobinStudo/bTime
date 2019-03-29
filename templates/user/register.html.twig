@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+<div class="container form-event my-4">
+    {{ form_start( form, { attr: { novalidate: 'novalidate' } } ) }}
+
+    {{ form_widget( form ) }}
+
+    <button type="submit" class="btn btn-primary my-2">Inscription</button>
+    {{ form_end( form ) }}
+</div>
+
+{% endblock %}

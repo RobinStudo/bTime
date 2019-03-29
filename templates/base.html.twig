@@ -31,6 +31,16 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
                 </form>
             </div>
+
+            <div class="user-area">
+                {% if app.user %}
+                    {{ app.user.username }} -
+                    <a href="{{ path('user_logout') }}" class="btn btn-primary">Déconnexion</a>
+                {% else %}
+                    <a href="{{ path('user_login') }}" class="btn btn-primary">Connexion</a>
+                    <a href="{{ path('user_register') }}" class="btn btn-secondary">Inscription</a>
+                {% endif %}
+            </div>
         </nav>
 
         {% block body %}{% endblock %}

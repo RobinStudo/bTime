@@ -41,9 +41,7 @@ class EventController extends AbstractController
 
         $form->handleRequest( $request );
         if( $form->isSubmitted() && $form->isValid() ){
-            // TODO - Récupérer l'utilisateur courant
-            $user = $this->getDoctrine()->getRepository( User::class )->find( 1 );
-            $event->setOwner( $user );
+            $event->setOwner( $this->getUser() );
 
             $em = $this->getDoctrine()->getManager();
             $em->persist( $event );
