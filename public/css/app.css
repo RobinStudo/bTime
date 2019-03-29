@@ -100,3 +100,16 @@ html, body{
     font-size: 2rem;
     margin: 5px 10px 5px 0;
 }
+
+.form-event input, .form-event textarea, .form-event select#event_place{
+    width: 100%;
+}
+
+.form-event input[type="checkbox"]{
+    width: auto;
+    margin-right: 5px;
+}
+
+.form-event input[type="checkbox"] + label{
+    margin-right: 5px;
+}

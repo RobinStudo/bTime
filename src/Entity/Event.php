@@ -5,9 +5,11 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Event
 {
@@ -19,16 +21,28 @@ class Event
     private $id;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez saisir un nom" )
+     * @Assert\Length(
+     *      min = 3,
+     *      minMessage = "Le nom de l'événement doit compter au minimum {{ limit }} caractères"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez saisir une date de début" )
+     * @Assert\GreaterThan("today", message="La date de début doit être dans le futur")
      * @ORM\Column(type="datetime")
      */
     private $startAt;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez saisir une date de fin" )
+     * @Assert\Expression(
+     *     "this.getEndAt() > this.getStartAt()",
+     *     message="La date de fin doit être supérieur à la date de début bouffon"
+     * )
      * @ORM\Column(type="datetime")
      */
     private $endAt;
@@ -39,6 +53,13 @@ class Event
     private $createdAt;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez saisir une description" )
+     * @Assert\Length(
+     *      min = 20,
+     *      max = 5000,
+     *      minMessage = "Votre description doit contenir au moins {{ limit }} caractères",
+     *      maxMessage = "Votre description doit contenir au maximum {{ limit }} caractères"
+     * )
      * @ORM\Column(type="text")
      */
     private $description;
@@ -49,16 +70,25 @@ class Event
     private $capacity;
 
     /**
+     * @Assert\Type(
+     *     type="float",
+     *     message="Vous devez saisir un prix valide"
+     * )
      * @ORM\Column(type="float", nullable=true)
      */
     private $price;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez renseigner une image" )
+     * @Assert\Url(
+     *    message = "Vous devez saisir une URL valide",
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $picture;
 
     /**
+     * @Assert\NotBlank( message = "Vous devez séléctionner un lieu" )
      * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="events")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -103,24 +133,24 @@ class Event
         return $this;
     }
 
-    public function getStartAt(): ?\DateTimeInterface
+    public function getStartAt()
     {
         return $this->startAt;
     }
 
-    public function setStartAt(\DateTimeInterface $startAt): self
+    public function setStartAt($startAt): self
     {
         $this->startAt = $startAt;
 
         return $this;
     }
 
-    public function getEndAt(): ?\DateTimeInterface
+    public function getEndAt()
     {
         return $this->endAt;
     }
 
-    public function setEndAt(\DateTimeInterface $endAt): self
+    public function setEndAt($endAt): self
     {
         $this->endAt = $endAt;
 
@@ -267,4 +297,11 @@ class Event
 
         return $this;
     }
+
+     /**
+      * @ORM\PrePersist
+      */
+     public function prePersist(){
+         $this->setCreatedAt( new \DateTime() );
+     }
 }
